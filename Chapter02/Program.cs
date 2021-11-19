@@ -65,6 +65,7 @@ public class Location
             }
         }
 
-        throw new BadHttpRequestException("Unable to bind Location", StatusCodes.Status400BadRequest);
+        location = null;
+        return false;
     }
 }
