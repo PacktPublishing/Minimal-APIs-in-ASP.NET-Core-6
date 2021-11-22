@@ -1,0 +1,34 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CORS Sample</title>
+
+</head>
+
+<body>
+  <div>
+      This is a sample page.<br>
+      We are using CORS to allow cross-origin requests.<br>
+  </div>
+  <button onclick="corsCall()">Click to call backend</button>
+  <div id="result"></div>
+  <script>
+      corsCall = () => {
+          fetch('http://localhost:5300/api/cors', {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Access-Control-Allow-Origin': '*'
+              }
+          })
+          .then(response => response.json())
+          .then(data => document.getElementById('result').innerHTML = JSON.stringify(data))
+          .catch(error => console.error(error))
+      }
+  </script>
+</body>
+</html>
