@@ -39,6 +39,18 @@ app.MapGet("/navigate", (Location location) => $"Location: {location.Latitude}, 
 // POST /navigate?lat=43.8427&lon=7.8527
 app.MapPost("/navigate", (Location location) => $"Location: {location.Latitude}, {location.Longitude}");
 
+app.MapGet("/ok", () => Results.Ok(new Person("Donald", "Duck")));
+
+app.MapGet("/notfound", () => Results.NotFound());
+
+app.MapPost("/badrequest", () =>
+{
+    // Creates a 400 response with a JSON body.
+    return Results.BadRequest(new { ErrorMessage = "Unable to complete the request" });
+});
+
+app.MapGet("/download", (string fileName) => Results.File(fileName));
+
 app.Run();
 
 internal class PeopleService { }
