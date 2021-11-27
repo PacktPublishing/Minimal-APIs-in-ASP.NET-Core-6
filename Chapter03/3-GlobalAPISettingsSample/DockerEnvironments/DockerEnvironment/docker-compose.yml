@@ -1,0 +1,7 @@
+services:
+  dockerenvironment:
+    container_name: MinimalApi-DockerEnvironment
+    image: minimalapi/dockerenvironment
+    build:
+      context: .
+      dockerfile: Dockerfile
