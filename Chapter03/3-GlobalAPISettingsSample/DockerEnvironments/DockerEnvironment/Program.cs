@@ -15,17 +15,17 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/env-test", () =>
+app.MapGet("/env-test", (IConfiguration configuration) =>
 {
-    var rootProperty = app.Configuration.GetValue<string>("RootProperty");
-    var sampleVariable = app.Configuration.GetValue<string>("RootSettings:SampleVariable");
-    var connectionString = app.Configuration.GetConnectionString("SqlConnection");
-    return new
+    var rootProperty = configuration.GetValue<string>("RootProperty");
+    var sampleVariable = configuration.GetValue<string>("RootSettings:SampleVariable");
+    var connectionString = configuration.GetConnectionString("SqlConnection");
+    return Results.Ok(new
     {
         RootProperty = rootProperty,
         SampleVariable = sampleVariable,
         ConnetionString = connectionString
-    };
+    });
 })
 .WithName("EnvironmentTest");
 
