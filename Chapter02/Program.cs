@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Reflection;
 using System.Security.Claims;
+using Chapter02.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,11 +52,18 @@ app.MapPost("/badrequest", () =>
 
 app.MapGet("/download", (string fileName) => Results.File(fileName));
 
+app.MapGet("/xml", () => Results.Extensions.Xml(new City { Name = "Taggia" }));
+
 app.Run();
 
-internal class PeopleService { }
+public class PeopleService { }
 
-internal record Person(string FirstName, string LastName);
+public record Person(string FirstName, string LastName);
+
+public record class City
+{
+    public string? Name { get; init; }
+}
 
 internal class Location
 {
