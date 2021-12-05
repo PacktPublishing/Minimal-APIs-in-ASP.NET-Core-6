@@ -44,9 +44,11 @@ app.MapGet("/people", SearchMethod);
 app.MapGet("/products", (HttpContext context, HttpRequest req, HttpResponse res, ClaimsPrincipal user) => { });
 
 // GET /navigate?location=43.8427,7.8527
+// Uncomment the TryParse method and comment the BindAsync method on the Location class to make this example work.
 app.MapGet("/navigate", (Location location) => $"Location: {location.Latitude}, {location.Longitude}");
 
 // POST /navigate?lat=43.8427&lon=7.8527
+// Uncomment the BindAsync method and comment the TryParse method on the Location class to make this example work.
 app.MapPost("/navigate", (Location location) => $"Location: {location.Latitude}, {location.Longitude}");
 
 app.MapGet("/ok", () => Results.Ok(new Person("Donald", "Duck")));
