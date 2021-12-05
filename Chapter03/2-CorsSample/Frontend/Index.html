@@ -16,6 +16,10 @@
   </div>
   <button onclick="corsCall()">Click to call backend</button>
   <div id="result"></div>
+  <button onclick="corsCallExtension()">Click to call backend Extensions</button>
+  <div id="resultExtension"></div>
+  <button onclick="corsCallAnnotation()">Click to call backend Annotation</button>
+  <div id="resultAnnotation"></div>
   <script>
       corsCall = () => {
           fetch('http://localhost:5300/api/cors', {
@@ -29,6 +33,30 @@
           .then(data => document.getElementById('result').innerHTML = JSON.stringify(data))
           .catch(error => console.error(error))
       }
+      corsCallExtension = () => {
+          fetch('http://localhost:5300/api/cors/extension', {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Access-Control-Allow-Origin': '*'
+              }
+          })
+          .then(response => response.json())
+          .then(data => document.getElementById('resultExtension').innerHTML = JSON.stringify(data))
+          .catch(error => console.error(error))
+        }
+      corsCallAnnotation = () => {
+          fetch('http://localhost:5300/api/cors/annotation', { 
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                }
+          })
+          .then(response => response.json())
+          .then(data => document.getElementById('resultAnnotation').innerHTML = JSON.stringify(data))
+          .catch(error => console.error(error))
+        }
   </script>
 </body>
 </html>
