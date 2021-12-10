@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
 using Chapter02.Extensions;
+using Chapter02.Handlers;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -70,6 +71,8 @@ app.MapGet("/product", () =>
     var product = new Product("Apple", null, 0.42, 6);
     return Results.Ok(product);
 });
+
+app.MapPeopleHandlers();
 
 app.Run();
 
