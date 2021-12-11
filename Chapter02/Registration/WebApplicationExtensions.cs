@@ -22,7 +22,7 @@ public static class WebApplicationExtensions
         var routeEndpointHandlerInterfaceType = typeof(IRouteEndpointHandler);
 
         var routeEndpointHandlerTypes = assembly.GetTypes().Where(t =>
-            t.IsClass && !t.IsAbstract
+            t.IsClass && !t.IsAbstract && !t.IsGenericType
             && t.GetConstructor(Type.EmptyTypes) != null
             && routeEndpointHandlerInterfaceType.IsAssignableFrom(t));
 
