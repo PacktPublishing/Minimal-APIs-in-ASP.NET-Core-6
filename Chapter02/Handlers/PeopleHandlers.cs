@@ -1,18 +1,29 @@
-﻿namespace Chapter02.Handlers;
+﻿using Chapter02.Registration;
 
-public static class PeopleHandler
+namespace Chapter02.Handlers;
+
+public class PeopleHandler : IRouteEndpointHandler
 {
-    public static void MapPeopleEndpoints(this IEndpointRouteBuilder app)
+    public void Map(IEndpointRouteBuilder app)
     {
-        //  Uncomment the following lines and comment the corresponding endpoints in Program.cs to use these handlers
-        //  instead of the one defined in Program.cs.
-
-        //app.MapGet("/people", GetList);
-        //app.MapGet("/people/{id:guid}", Get);
-        //app.MapPost("/people", Insert);
-        //app.MapPut("/people/{id:guid}", Update);
-        //app.MapDelete("/people/{id:guid}", Delete);
+        app.MapGet("/api/people", GetList);
+        app.MapGet("/api/people/{id:guid}", Get);
+        app.MapPost("/api/people", Insert);
+        app.MapPut("/api/people/{id:guid}", Update);
+        app.MapDelete("/api/people/{id:guid}", Delete);
     }
+
+    // Comment the Map method above, uncomment the following one (and the corresponding invocation in Program.cs),
+    // then make the class static and delete the IRouteEndpointHandler inheritance if you want to explicitly register the endpoints
+    // instead of using the automatic registration.
+    //public static void MapPeopleEndpoints(this IEndpointRouteBuilder app)
+    //{
+    //    app.MapGet("/api/people", GetList);
+    //    app.MapGet("/api/people/{id:guid}", Get);
+    //    app.MapPost("/api/people", Insert);
+    //    app.MapPut("/api/people/{id:guid}", Update);
+    //    app.MapDelete("/api/people/{id:guid}", Delete);
+    //}
 
     private static IResult GetList(PeopleService peopleService) { return Results.NoContent(); }
 

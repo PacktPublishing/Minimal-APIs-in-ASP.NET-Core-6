@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
 using Chapter02.Extensions;
-using Chapter02.Handlers;
+using Chapter02.Registration;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -72,7 +72,11 @@ app.MapGet("/product", () =>
     return Results.Ok(product);
 });
 
-app.MapPeopleEndpoints();
+// This method is needed if we want to explicitly register the handlers.
+//app.MapPeopleEndpoints();
+
+// This method automatically register all the handlers that implement the IRouteEndpointHandler interface.
+app.MapEndpoints(Assembly.GetExecutingAssembly());
 
 app.Run();
 
