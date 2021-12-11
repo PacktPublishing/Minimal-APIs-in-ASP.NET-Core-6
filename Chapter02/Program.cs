@@ -72,7 +72,7 @@ app.MapGet("/product", () =>
     return Results.Ok(product);
 });
 
-app.MapPeopleHandlers();
+app.MapPeopleEndpoints();
 
 app.Run();
 

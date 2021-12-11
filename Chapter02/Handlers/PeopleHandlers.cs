@@ -1,8 +1,8 @@
 ﻿namespace Chapter02.Handlers;
 
-public static class PeopleHandlers
+public static class PeopleHandler
 {
-    public static void MapPeopleHandlers(this IEndpointRouteBuilder app)
+    public static void MapPeopleEndpoints(this IEndpointRouteBuilder app)
     {
         //  Uncomment the following lines and comment the corresponding endpoints in Program.cs to use these handlers
         //  instead of the one defined in Program.cs.

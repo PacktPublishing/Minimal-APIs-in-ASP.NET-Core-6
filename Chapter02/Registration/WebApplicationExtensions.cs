@@ -4,17 +4,17 @@ namespace Chapter02.Registration;
 
 public static class WebApplicationExtensions
 {
-    public static void RegisterEndpoints(this WebApplication app)
+    public static void MapEndpoints(this WebApplication app)
     {
-        RegisterEndpoints(app, Assembly.GetCallingAssembly());
+        MapEndpoints(app, Assembly.GetCallingAssembly());
     }
 
-    public static void RegisterEndpointsFromAssemblyContaining<T>(this WebApplication app) where T : class
+    public static void MapEndpoints<T>(this WebApplication app) where T : class
     {
-        RegisterEndpoints(app, typeof(T).Assembly);
+        MapEndpoints(app, typeof(T).Assembly);
     }
 
-    public static void RegisterEndpoints(this WebApplication app, Assembly assembly)
+    public static void MapEndpoints(this WebApplication app, Assembly assembly)
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(assembly);
