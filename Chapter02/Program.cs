@@ -84,14 +84,14 @@ public class PeopleService { }
 
 public record class Person(string FirstName, string LastName);
 
-public record class Product(string Name, string? Description, double UnitPrice, int Quantity)
-{
-    public double TotalPrice => UnitPrice * Quantity;
-}
-
 public record class City
 {
     public string? Name { get; init; }
+}
+
+public record class Product(string Name, string? Description, double UnitPrice, int Quantity)
+{
+    public double TotalPrice => UnitPrice * Quantity;
 }
 
 public class Location
