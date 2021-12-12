@@ -72,15 +72,14 @@ app.MapGet("/product", () =>
     return Results.Ok(product);
 });
 
-// This method is needed if we want to explicitly register the handlers.
-//app.MapPeopleEndpoints();
-
-// This method automatically register all the handlers that implement the IRouteEndpointHandler interface.
+// This method automatically registers all the handlers that implement the IEndpointRouteHandler interface.
 app.MapEndpoints(Assembly.GetExecutingAssembly());
 
 app.Run();
 
-public class PeopleService { }
+public class PeopleService
+{
+}
 
 public record class Person(string FirstName, string LastName);
 
