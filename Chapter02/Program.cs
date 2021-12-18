@@ -1,9 +1,20 @@
 using System.Globalization;
 using System.Reflection;
 using System.Security.Claims;
+using System.Text.Json.Serialization;
+using Chapter02.Extensions;
+using Chapter02.Registration;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+{
+    options.SerializerOptions.IgnoreReadOnlyProperties = true;
+    options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+
 builder.Services.AddScoped<PeopleService>();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -34,9 +45,11 @@ app.MapGet("/people", SearchMethod);
 app.MapGet("/products", (HttpContext context, HttpRequest req, HttpResponse res, ClaimsPrincipal user) => { });
 
 // GET /navigate?location=43.8427,7.8527
+// Uncomment the TryParse method and comment the BindAsync method on the Location class to make this example work.
 app.MapGet("/navigate", (Location location) => $"Location: {location.Latitude}, {location.Longitude}");
 
 // POST /navigate?lat=43.8427&lon=7.8527
+// Uncomment the BindAsync method and comment the TryParse method on the Location class to make this example work.
 app.MapPost("/navigate", (Location location) => $"Location: {location.Latitude}, {location.Longitude}");
 
 app.MapGet("/ok", () => Results.Ok(new Person("Donald", "Duck")));
@@ -51,13 +64,36 @@ app.MapPost("/badrequest", () =>
 
 app.MapGet("/download", (string fileName) => Results.File(fileName));
 
+app.MapGet("/xml", () => Results.Extensions.Xml(new City { Name = "Taggia" }));
+
+app.MapGet("/product", () =>
+{
+    var product = new Product("Apple", null, 0.42, 6);
+    return Results.Ok(product);
+});
+
+// This method automatically registers all the handlers that implement the IEndpointRouteHandler interface.
+app.MapEndpoints(Assembly.GetExecutingAssembly());
+
 app.Run();
 
-internal class PeopleService { }
+public class PeopleService
+{
+}
 
-internal record Person(string FirstName, string LastName);
+public record class Person(string FirstName, string LastName);
 
-internal class Location
+public record class City
+{
+    public string? Name { get; init; }
+}
+
+public record class Product(string Name, string? Description, double UnitPrice, int Quantity)
+{
+    public double TotalPrice => UnitPrice * Quantity;
+}
+
+public class Location
 {
     public double Latitude { get; set; }
 
