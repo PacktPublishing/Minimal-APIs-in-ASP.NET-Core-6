@@ -1,17 +1,18 @@
-using Swashbuckle.AspNetCore.Annotations;
 using System.Net.Mime;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = builder.Environment.ApplicationName, Version = "v1" });
-    c.EnableAnnotations();
-    c.OperationFilter<AnnotationsOperationFilter>();
-    //// Add comment
-    var xpath = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
-    c.IncludeXmlComments(xpath);   
+    c.SwaggerDoc("v1", new()
+    {
+        Title = builder.Environment.ApplicationName,
+        Version = "v1",
+        Contact = new() { Name = "PacktAuthor", Email = "authors@packtpub.com", Url = new Uri("https://www.packtpub.com/") },
+        Description = "PacktPub Minimal API - Swagger",
+        License = new Microsoft.OpenApi.Models.OpenApiLicense(),
+        TermsOfService = new("https://www.packtpub.com/")
+    });
 });
 
 var app = builder.Build();
@@ -20,7 +21,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     // app.UseSwaggerUI();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", $"{builder.Environment.ApplicationName} v1"));    
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", $"{builder.Environment.ApplicationName} v1"));
 }
 
 app.UseHttpsRedirection();
@@ -41,8 +42,7 @@ app.MapGet("/sampleresponseskipped", () =>
 
 app.MapGet("/{id}", (int id) => Results.Ok(id));
 app.MapPost("/", (ResponseData data) => Results.Ok(data))
-   .Accepts<ResponseData>(MediaTypeNames.Application.Json)
-   .WithMetadata(new SwaggerOperationAttribute("My Summary", "My Description"));
+   .Accepts<ResponseData>(MediaTypeNames.Application.Json);
 
 app.Run();
 

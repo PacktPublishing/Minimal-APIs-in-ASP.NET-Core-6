@@ -35,7 +35,6 @@ app.MapGet("/api/cors/extension", () =>
 app.MapGet("/api/cors/annotation", [EnableCors("MyCustomPolicy")] () =>
 {
     return Results.Ok(new { CorsResultJson = true });
-})
-.RequireCors("MyCustomPolicy");
+});
 
 app.Run();
