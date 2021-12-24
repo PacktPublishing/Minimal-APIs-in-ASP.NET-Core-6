@@ -1,3 +1,4 @@
+using SwaggerSample.Filter;
 using System.Net.Mime;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen(c =>
         License = new Microsoft.OpenApi.Models.OpenApiLicense(),
         TermsOfService = new("https://www.packtpub.com/")
     });
+    c.OperationFilter<CorrelationIdOperationFilter>();
 });
 
 var app = builder.Build();
