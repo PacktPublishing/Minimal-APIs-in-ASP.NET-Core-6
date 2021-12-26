@@ -42,15 +42,17 @@ app.MapGet("/read/options", (IOptions<OptionBasic> optionsBasic,
 })
 .WithName("ReadOptions");
 
-app.MapGet("/read/configurations", (IConfiguration configuration) =>
+app.MapGet("/read/configurations", (IConfiguration configuration, IWebHostEnvironment environment) =>
 {
+    var priority = configuration.GetValue<string>("Priority");
     var customObject = configuration.GetSection(nameof(MyCustomObject)).Get<MyCustomObject>();
     return Results.Ok(new
     {
         MyCustomValue = configuration.GetValue<string>("MyCustomValue"),
         ConnectionString = configuration.GetConnectionString("Default"),
         CustomObject = customObject,
-        StartupObject = startupConfig
+        StartupObject = startupConfig,
+        Priority = $"Value: {priority} - from Enviroment: {environment.EnvironmentName}"
     });
 })
 .WithName("ReadConfigurations");
