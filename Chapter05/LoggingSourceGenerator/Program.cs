@@ -17,6 +17,7 @@ app.UseHttpsRedirection();
 app.MapPost("/start-log", (PostData data, LogGenerator logGenerator) =>
 {
     logGenerator.StartEndpointSignal("start-log", data);
+    logGenerator.LogLevelFilteredAtRuntime(LogLevel.Trace, "start-log", data);
 })
 .WithName("StartLog");
 app.Run();

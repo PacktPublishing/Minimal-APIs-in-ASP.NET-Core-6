@@ -21,6 +21,12 @@
             Level = LogLevel.Debug,
             Message = "Start Endpoint: {endpointName} with data {dataIn}")]
         public partial void StartEndpointSignal(string endpointName, object dataIn);
+
+        [LoggerMessage(
+           EventId = 101,
+           EventName = "StartFiltered",
+           Message = "Log level filtered: {endpointName} with data {dataIn}")]
+        public partial void LogLevelFilteredAtRuntime(LogLevel logLevel, string endpointName, object dataIn);
     }
 
     public class LogGeneratorCategory { }
