@@ -1,3 +1,9 @@
 dotnet .\MinimalAPI.Sample\bin\Release\net6.0\MinimalAPI.Sample.dll --urls=https://localhost:7059/
 dotnet .\ControllerAPI.Sample\bin\Release\net6.0\ControllerAPI.Sample.dll --urls=https://localhost:7149/
 dotnet .\DotNetBenchmarkRunners\bin\Release\net6.0\DotNetBenchmarkRunners.dll --filter *
+
+
+
+Fo load testing
+dotnet .\MinimalAPI.Sample\bin\Release\net6.0\MinimalAPI.Sample.dll --urls=http://localhost:7059/
+dotnet .\ControllerAPI.Sample\bin\Release\net6.0\ControllerAPI.Sample.dll --urls=http://localhost:7149/
