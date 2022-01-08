@@ -1,0 +1,3 @@
+k6 run .\json.js
+k6 run .\validations.js
+k6 run .\plaint-text.js

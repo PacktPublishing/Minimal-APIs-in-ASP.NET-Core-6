@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DotNetBenchmarkRunners": {
+      "commandName": "Project",
+      "commandLineArgs": "--filter *"
+    }
+  }
+}

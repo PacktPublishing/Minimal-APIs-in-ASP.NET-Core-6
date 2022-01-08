@@ -1,3 +1,4 @@
+using SwaggerSample.Filter;
 using System.Net.Mime;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen(c =>
         License = new Microsoft.OpenApi.Models.OpenApiLicense(),
         TermsOfService = new("https://www.packtpub.com/")
     });
+    c.OperationFilter<CorrelationIdOperationFilter>();
 });
 
 var app = builder.Build();
@@ -43,7 +45,11 @@ app.MapGet("/sampleresponseskipped", () =>
 app.MapGet("/{id}", (int id) => Results.Ok(id));
 app.MapPost("/", (ResponseData data) => Results.Ok(data))
    .Accepts<ResponseData>(MediaTypeNames.Application.Json);
+app.MapPost("/complex", (ComplexResponseData data) => Results.Ok(data))
+   .Accepts<ComplexResponseData>(MediaTypeNames.Application.Json);
 
 app.Run();
 
 internal record ResponseData(string Value);
+
+internal record ComplexResponseData(string Value, int Number, decimal Money, DateTimeOffset Date);
