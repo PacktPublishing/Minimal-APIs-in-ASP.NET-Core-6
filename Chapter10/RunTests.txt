@@ -1,9 +1,15 @@
-dotnet .\MinimalAPI.Sample\bin\Release\net6.0\MinimalAPI.Sample.dll --urls=https://localhost:7059/
-dotnet .\ControllerAPI.Sample\bin\Release\net6.0\ControllerAPI.Sample.dll --urls=https://localhost:7149/
+dotnet .\MinimalAPI.Sample\bin\Release\net6.0\MinimalAPI.Sample.dll --urls="https://localhost:7059/;http://localhost:7060/"
+dotnet .\ControllerAPI.Sample\bin\Release\net6.0\ControllerAPI.Sample.dll --urls="https://localhost:7149/;http://localhost:7150/"
 dotnet .\DotNetBenchmarkRunners\bin\Release\net6.0\DotNetBenchmarkRunners.dll --filter *
 
 
 
-Fo load testing
-dotnet .\MinimalAPI.Sample\bin\Release\net6.0\MinimalAPI.Sample.dll --urls=http://localhost:7059/
-dotnet .\ControllerAPI.Sample\bin\Release\net6.0\ControllerAPI.Sample.dll --urls=http://localhost:7149/
+For load testing
+k6 run .\K6\Controllers\json.js --summary-export=.\K6\results\controller-json.json
+k6 run .\K6\Controllers\plain-text.js --summary-export=.\K6\results\controller-plain-text.json
+k6 run .\K6\Controllers\validations.js --summary-export=.\K6\results\controller-validations.json
+
+
+k6 run .\K6\Minimal\json.js --summary-export=.\K6\results\minimal-json.json
+k6 run .\K6\Minimal\plain-text.js --summary-export=.\K6\results\minimal-plain-text.json
+k6 run .\K6\Minimal\validations.js --summary-export=.\K6\results\minimal-validations.json

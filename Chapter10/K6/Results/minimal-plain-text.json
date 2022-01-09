@@ -1,0 +1,94 @@
+{
+    "metrics": {
+        "http_reqs": {
+            "count": 194258,
+            "rate": 2285.2896237025666
+        },
+        "http_req_receiving": {
+            "avg": 0.22305425413624963,
+            "p(95)": 0.9971
+        },
+        "http_req_duration": {
+            "avg": 18.59025081849883,
+            "p(95)": 32.9355,
+            "thresholds": {
+                "p(95)<500": false
+            }
+        },
+        "http_req_waiting": {
+            "avg": 18.31622267602864,
+            "p(95)": 32.363
+        },
+        "http_req_sending": {
+            "p(95)": 0.5078,
+            "avg": 0.0509738883340714
+        },
+        "http_req_blocked": {
+            "avg": 0.01084736227079452,
+            "p(95)": 0
+        },
+        "http_req_tls_handshaking": {
+            "avg": 0.008350967270331208,
+            "p(95)": 0
+        },
+        "checks": {
+            "passes": 97129,
+            "fails": 0,
+            "value": 1
+        },
+        "vus": {
+            "min": 1,
+            "max": 50,
+            "value": 1
+        },
+        "http_req_failed": {
+            "fails": 194258,
+            "passes": 0,
+            "value": 0
+        },
+        "data_received": {
+            "count": 24856148,
+            "rate": 292412.6528102591
+        },
+        "vus_max": {
+            "value": 50,
+            "min": 50,
+            "max": 50
+        },
+        "iteration_duration": {
+            "avg": 37.39087693582729,
+            "p(95)": 52.54571999999998
+        },
+        "iterations": {
+            "rate": 1142.6448118512833,
+            "count": 97129
+        },
+        "data_sent": {
+            "count": 13046936,
+            "rate": 153486.7416626933
+        },
+        "http_req_duration{expected_response:true}": {
+            "avg": 18.59025081849883,
+            "p(95)": 32.9355
+        },
+        "http_req_connecting": {
+            "avg": 0.0002644637543884936,
+            "p(95)": 0
+        }
+    },
+    "root_group": {
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {},
+        "checks": {
+                "status is 200": {
+                    "name": "status is 200",
+                    "path": "::status is 200",
+                    "id": "6210a8cd14cd70477eba5c5e4cb3fb5f",
+                    "passes": 97129,
+                    "fails": 0
+                }
+            }
+    }
+}

@@ -1,7 +1,8 @@
 import http from "k6/http";
-import { check, group } from "k6";
+import { check } from "k6";
 
 export let options = {
+    summaryTrendStats: ["avg", "p(95)"],
     stages: [
         // Linearly ramp up from 1 to 50 VUs during 10 seconds
         { target: 50, duration: "10s" },
@@ -26,7 +27,7 @@ export let options = {
 };
 
 export default function () {    
-    let response = http.get("http://localhost:7059/text-plain");
+    let response = http.get("http://localhost:7150/text-plain");
 
     // check() returns false if any of the specified conditions fail
     check(response, {
