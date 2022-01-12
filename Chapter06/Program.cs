@@ -1,4 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using Chapter06.Dtos;
+using Chapter06.Entities;
+using Chapter06.Extensions;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
@@ -54,6 +57,30 @@ app.MapPost("/people-fluentvalidation", (Person person, IValidator<Person> valid
 })
 .Produces(StatusCodes.Status204NoContent)
 .ProducesValidationProblem();
+
+app.MapGet("/people/{id:int}", (int id) =>
+{
+    // In a real application, this entity could be
+    // retrieved from a database, checking if the person
+    // with the given ID exists.
+    var personEntity = new PersonEntity
+    {
+        Id = 42,
+        FirstName = "Donald",
+        LastName = "Duck",
+        BirthDate = new DateTime(1934, 6, 9),
+        Address = new AddressEntity
+        {
+            Street = "1313 Webfoot Street",
+            City = "Duckburg"
+        }
+    };
+
+    var personDto = personEntity.ToDto();
+    return Results.Ok(personDto);
+})
+.Produces(StatusCodes.Status200OK, typeof(PersonDto))
+.Produces(StatusCodes.Status404NotFound);
 
 app.Run();
 
