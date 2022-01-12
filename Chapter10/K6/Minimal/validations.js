@@ -1,7 +1,8 @@
 import http from "k6/http";
-import { check, group } from "k6";
+import { check } from "k6";
 
 export let options = {
+    summaryTrendStats: ["avg", "p(95)"],
     stages: [
         // Linearly ramp up from 1 to 50 VUs during 10 seconds
         { target: 50, duration: "10s" },
@@ -27,7 +28,7 @@ export let options = {
 
 export default function () {
     let body = JSON.stringify({ id: 0, description: 'test' });
-    let res = http.post("http://localhost:7059/validations", body, { headers: { "Content-Type": "application/json" } });
+    let res = http.post("http://localhost:7060/validations", body, { headers: { "Content-Type": "application/json" } });
 
     let j = JSON.parse(res.body);
 
