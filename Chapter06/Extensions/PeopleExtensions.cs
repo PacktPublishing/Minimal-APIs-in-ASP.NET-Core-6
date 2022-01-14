@@ -17,8 +17,9 @@ public static class PeopleExtensions
 
     private static int CalculateAge(DateTime dateOfBirth)
     {
-        var age = DateTime.Now.Year - dateOfBirth.Year;
-        if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
+        var today = DateTime.Today;
+        var age = today.Year - dateOfBirth.Year;
+        if (today.DayOfYear < dateOfBirth.DayOfYear)
         {
             age--;
         }
