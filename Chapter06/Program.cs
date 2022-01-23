@@ -61,6 +61,17 @@ app.MapPost("/people-fluentvalidation", (Person person, IValidator<Person> valid
 .Produces(StatusCodes.Status204NoContent)
 .ProducesValidationProblem();
 
+app.MapGet("/people-nomapping/{id:int}", (int id) =>
+{
+    // In a real application, this entity could be
+    // retrieved from a database, checking if the person
+    // with the given ID exists.
+    var person = new PersonEntity();
+    return Results.Ok(person);
+})
+.Produces(StatusCodes.Status200OK, typeof(PersonEntity))
+.Produces(StatusCodes.Status404NotFound);
+
 app.MapGet("/people-manualmapping/{id:int}", (int id) =>
 {
     // In a real application, this entity could be
