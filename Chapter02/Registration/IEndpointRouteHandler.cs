@@ -2,5 +2,5 @@
 
 public interface IEndpointRouteHandler
 {
-    public void Map(IEndpointRouteBuilder app);
+    public void MapEndpoints(IEndpointRouteBuilder app);
 }

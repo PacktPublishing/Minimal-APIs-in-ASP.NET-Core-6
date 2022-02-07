@@ -4,7 +4,7 @@ namespace Chapter02.Handlers;
 
 public class PeopleHandler : IEndpointRouteHandler
 {
-    public void Map(IEndpointRouteBuilder app)
+    public void MapEndpoints(IEndpointRouteBuilder app)
     {
         app.MapGet("/api/people", GetList);
         app.MapGet("/api/people/{id:guid}", Get);
@@ -13,13 +13,13 @@ public class PeopleHandler : IEndpointRouteHandler
         app.MapDelete("/api/people/{id:guid}", Delete);
     }
 
-    private static IResult GetList(PeopleService peopleService) { return Results.NoContent(); }
+    private static IResult GetList(PeopleService peopleService) => Results.NoContent();
 
-    private static IResult Get(Guid id, PeopleService peopleService) { return Results.NoContent(); }
+    private static IResult Get(Guid id, PeopleService peopleService) => Results.NoContent();
 
-    private static IResult Insert(Person person, PeopleService people) { return Results.NoContent(); }
+    private static IResult Insert(Person person, PeopleService people) => Results.NoContent();
 
-    private static IResult Update(Person person, PeopleService people) { return Results.NoContent(); }
+    private static IResult Update(Person person, PeopleService people) => Results.NoContent();
 
-    private static IResult Delete(Guid id) { return Results.NoContent(); }
+    private static IResult Delete(Guid id) => Results.NoContent();
 }
