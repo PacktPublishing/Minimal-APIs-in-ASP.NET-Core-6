@@ -19,7 +19,7 @@ public class PeopleHandler : IEndpointRouteHandler
 
     private static IResult Insert(Person person, PeopleService people) => Results.NoContent();
 
-    private static IResult Update(Person person, PeopleService people) => Results.NoContent();
+    private static IResult Update(Guid id, Person person, PeopleService people) => Results.NoContent();
 
     private static IResult Delete(Guid id) => Results.NoContent();
 }
