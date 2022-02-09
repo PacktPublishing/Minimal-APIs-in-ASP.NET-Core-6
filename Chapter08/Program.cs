@@ -38,17 +38,17 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateAudience = false,
-            ValidateIssuer = false,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecuritystring")),
-            ClockSkew = TimeSpan.Zero
-        };
-    });
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecuritystring")),
+        ValidIssuer = "Minimal APIs Issuer",
+        ValidAudience = "Minimal APIs Client",
+        ClockSkew = TimeSpan.FromMinutes(2)
+    };
+});
 
 builder.Services.AddAuthorization();
 
@@ -78,7 +78,11 @@ app.MapPost("/api/auth/login", (LoginRequest request) =>
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecuritystring"));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-        var jwtSecurityToken = new JwtSecurityToken(claims: claims, expires: DateTime.UtcNow.AddHours(1), signingCredentials: credentials);
+        var jwtSecurityToken = new JwtSecurityToken(
+            issuer: "Minimal APIs Issuer",
+            audience: "Minimal APIs Client",
+            claims: claims, expires: DateTime.UtcNow.AddHours(1), signingCredentials: credentials);
+
         var accessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
 
         return Results.Ok(new { AccessToken = accessToken });
