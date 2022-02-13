@@ -15,10 +15,10 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
     {
+        Type = SecuritySchemeType.ApiKey,
         In = ParameterLocation.Header,
-        Description = "Insert the Bearer Token",
         Name = HeaderNames.Authorization,
-        Type = SecuritySchemeType.ApiKey
+        Description = "Insert the token with the 'Bearer ' prefix"
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -26,7 +26,7 @@ builder.Services.AddSwaggerGen(options =>
         {
             new OpenApiSecurityScheme
             {
-                Reference= new OpenApiReference
+                Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
                     Id = JwtBearerDefaults.AuthenticationScheme
@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecuritystring")),
-        ValidIssuer = "Minimal APIs Issuer",
+        ValidIssuer = "https://www.packtpub.com",
         ValidAudience = "Minimal APIs Client",
         ClockSkew = TimeSpan.FromMinutes(2)
     };
@@ -72,14 +72,16 @@ app.MapPost("/api/auth/login", (LoginRequest request) =>
     {
         var claims = new List<Claim>()
         {
-            new(ClaimTypes.Name, request.Username)
+            new(ClaimTypes.Name, request.Username),
+            new(ClaimTypes.Role, "Administrator"),
+            new(ClaimTypes.Role, "User")
         };
 
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecuritystring"));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         var jwtSecurityToken = new JwtSecurityToken(
-            issuer: "Minimal APIs Issuer",
+            issuer: "https://www.packtpub.com",
             audience: "Minimal APIs Client",
             claims: claims, expires: DateTime.UtcNow.AddHours(1), signingCredentials: credentials);
 
@@ -96,6 +98,13 @@ app.MapGet("/api/attribute-protected", [Authorize] () => "This endpoint is prote
 
 app.MapGet("/api/method-protected", () => "This endpoint is protected using the RequireAuthorization method")
 .RequireAuthorization();
+
+app.MapGet("/api/me", [Authorize] (ClaimsPrincipal user) => $"Logged username: {user.Identity!.Name}");
+
+app.MapGet("/api/admin-attribute-protected", [Authorize(Roles = "Administrator")] () => { });
+
+app.MapGet("/api/admin-method-protected", () => { })
+.RequireAuthorization(new AuthorizeAttribute { Roles = "Administrator" });
 
 app.Run();
 
