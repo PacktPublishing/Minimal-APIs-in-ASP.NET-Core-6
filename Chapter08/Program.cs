@@ -50,7 +50,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     };
 });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Tenant42", policy =>
+    {
+        policy.RequireClaim("tenant-id", "42");
+    });
+});
 
 var app = builder.Build();
 
@@ -74,7 +80,8 @@ app.MapPost("/api/auth/login", (LoginRequest request) =>
         {
             new(ClaimTypes.Name, request.Username),
             new(ClaimTypes.Role, "Administrator"),
-            new(ClaimTypes.Role, "User")
+            new(ClaimTypes.Role, "User"),
+            new("tenant-id", "42")
         };
 
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecuritystring"));
@@ -105,6 +112,23 @@ app.MapGet("/api/admin-attribute-protected", [Authorize(Roles = "Administrator")
 
 app.MapGet("/api/admin-method-protected", () => { })
 .RequireAuthorization(new AuthorizeAttribute { Roles = "Administrator" });
+
+app.MapGet("/api/stackeholder", [Authorize(Roles = "Stakeholder")] () => { });
+
+app.MapGet("/api/role-check", [Authorize] (ClaimsPrincipal user) =>
+{
+    if (user.IsInRole("Administrator"))
+    {
+        return "User is an Administrator";
+    }
+
+    return "This is a normal user";
+});
+
+app.MapGet("/api/claim-attribute-protected", [Authorize(Policy = "Tenant42")] () => { });
+
+app.MapGet("/api/claim-method-protected", () => { })
+.RequireAuthorization("Tenant42");
 
 app.Run();
 
