@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Chapter08.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
@@ -56,7 +57,18 @@ builder.Services.AddAuthorization(options =>
     {
         policy.RequireClaim("tenant-id", "42");
     });
+
+    options.AddPolicy("TimedAccessPolicy", policy =>
+    {
+        policy.Requirements.Add(new MaintenanceTimeRequirement
+        {
+            StartTime = new TimeOnly(16, 0, 0),
+            EndTime = new TimeOnly(18, 0, 0)
+        });
+    });
 });
+
+builder.Services.AddScoped<IAuthorizationHandler, MaintenanceTimeAuthorizationHandler>();
 
 var app = builder.Build();
 
@@ -129,6 +141,8 @@ app.MapGet("/api/claim-attribute-protected", [Authorize(Policy = "Tenant42")] ()
 
 app.MapGet("/api/claim-method-protected", () => { })
 .RequireAuthorization("Tenant42");
+
+app.MapGet("/api/custom-policy-protected", [Authorize(Policy = "TimedAccessPolicy")] () => { });
 
 app.Run();
 
