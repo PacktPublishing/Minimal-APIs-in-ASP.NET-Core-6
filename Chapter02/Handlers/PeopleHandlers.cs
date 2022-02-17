@@ -1,4 +1,4 @@
-﻿using Chapter02.Registration;
+﻿using Chapter02.Routing;
 
 namespace Chapter02.Handlers;
 

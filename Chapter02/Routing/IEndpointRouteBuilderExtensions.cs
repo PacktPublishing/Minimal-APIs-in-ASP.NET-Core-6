@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Chapter02.Registration;
+namespace Chapter02.Routing;
 
 public static class IEndpointRouteBuilderExtensions
 {

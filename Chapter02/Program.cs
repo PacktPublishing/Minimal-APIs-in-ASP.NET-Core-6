@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
 using Chapter02.Extensions;
-using Chapter02.Registration;
+using Chapter02.Routing;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,4 +1,4 @@
-﻿namespace Chapter02.Registration;
+﻿namespace Chapter02.Routing;
 
 public interface IEndpointRouteHandler
 {
