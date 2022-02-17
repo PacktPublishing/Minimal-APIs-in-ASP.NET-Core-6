@@ -53,6 +53,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization(options =>
 {
+    /* Use this code to define a default policy that is automatically applied when using the
+     * Authorize attribute or the RequireAuthorization method with no other parameters.
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
+        .RequireClaim("tenant-id").Build();
+
+    options.DefaultPolicy = policy;
+     */
+
+    /* Setting the FallbackPolicy equals to DefaultPolicy, means that every endpoints is protected,
+     * even if we don't specify the Authorize attribute or the RequireAuthorization method
+     */
+    options.FallbackPolicy = options.DefaultPolicy;
+
     options.AddPolicy("Tenant42", policy =>
     {
         policy.RequireClaim("tenant-id", "42");
@@ -84,7 +97,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapPost("/api/auth/login", (LoginRequest request) =>
+// We use AllowAnonymous to bypass the FallbackPolicy, that requires an authenticated user.
+app.MapPost("/api/auth/login", [AllowAnonymous] (LoginRequest request) =>
 {
     if (request.Username == "marco" && request.Password == "P@$$w0rd")
     {
@@ -111,7 +125,6 @@ app.MapPost("/api/auth/login", (LoginRequest request) =>
 
     return Results.BadRequest();
 });
-
 
 app.MapGet("/api/attribute-protected", [Authorize] () => "This endpoint is protected using the Authorize attribute");
 
