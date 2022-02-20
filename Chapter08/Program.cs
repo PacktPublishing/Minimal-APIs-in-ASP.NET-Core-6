@@ -150,9 +150,9 @@ app.MapGet("/api/role-check", [Authorize] (ClaimsPrincipal user) =>
     return "This is a normal user";
 });
 
-app.MapGet("/api/claim-attribute-protected", [Authorize(Policy = "Tenant42")] () => { });
+app.MapGet("/api/policy-attribute-protected", [Authorize(Policy = "Tenant42")] () => { });
 
-app.MapGet("/api/claim-method-protected", () => { })
+app.MapGet("/api/policy-method-protected", () => { })
 .RequireAuthorization("Tenant42");
 
 app.MapGet("/api/custom-policy-protected", [Authorize(Policy = "TimedAccessPolicy")] () => { });
