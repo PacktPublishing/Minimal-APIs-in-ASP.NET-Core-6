@@ -56,13 +56,13 @@ builder.Services.AddAuthorization(options =>
     /* Use this code to define a default policy that is automatically applied when using the
      * Authorize attribute or the RequireAuthorization method with no other parameters.
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
-        .RequireClaim("tenant-id").Build();
+      .RequireClaim("tenant-id").Build();
 
     options.DefaultPolicy = policy;
-     */
+    */
 
     /* Setting the FallbackPolicy equals to DefaultPolicy, means that every endpoints is protected,
-     * even if we don't specify the Authorize attribute or the RequireAuthorization method
+     * even if we don't specify the Authorize attribute or the RequireAuthorization method.
      */
     options.FallbackPolicy = options.DefaultPolicy;
 
@@ -75,8 +75,8 @@ builder.Services.AddAuthorization(options =>
     {
         policy.Requirements.Add(new MaintenanceTimeRequirement
         {
-            StartTime = new TimeOnly(16, 0, 0),
-            EndTime = new TimeOnly(18, 0, 0)
+            StartTime = new TimeOnly(0, 0, 0),
+            EndTime = new TimeOnly(4, 0, 0)
         });
     });
 });
@@ -138,7 +138,7 @@ app.MapGet("/api/admin-attribute-protected", [Authorize(Roles = "Administrator")
 app.MapGet("/api/admin-method-protected", () => { })
 .RequireAuthorization(new AuthorizeAttribute { Roles = "Administrator" });
 
-app.MapGet("/api/stackeholder", [Authorize(Roles = "Stakeholder")] () => { });
+app.MapGet("/api/stackeholder-protected", [Authorize(Roles = "Stakeholder")] () => { });
 
 app.MapGet("/api/role-check", [Authorize] (ClaimsPrincipal user) =>
 {

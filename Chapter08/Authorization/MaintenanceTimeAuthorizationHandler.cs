@@ -2,11 +2,9 @@
 
 namespace Chapter08.Authorization;
 
-public class MaintenanceTimeAuthorizationHandler
-    : AuthorizationHandler<MaintenanceTimeRequirement>
+public class MaintenanceTimeAuthorizationHandler : AuthorizationHandler<MaintenanceTimeRequirement>
 {
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
-        MaintenanceTimeRequirement requirement)
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, MaintenanceTimeRequirement requirement)
     {
         var isAuthorized = true;
         if (!context.User.IsInRole("Administrator"))
