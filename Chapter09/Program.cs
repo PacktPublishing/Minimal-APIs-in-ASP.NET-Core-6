@@ -16,6 +16,7 @@ var supportedCultures = new CultureInfo[] { new("en"), new("it") };
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
     options.DefaultRequestCulture = new RequestCulture(supportedCultures.First());
 });
 
