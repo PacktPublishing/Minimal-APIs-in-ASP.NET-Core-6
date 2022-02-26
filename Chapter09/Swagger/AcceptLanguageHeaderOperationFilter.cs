@@ -6,11 +6,11 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Chapter09.Swagger;
 
-public class CultureAwareOperationFilter : IOperationFilter
+public class AcceptLanguageHeaderOperationFilter : IOperationFilter
 {
     private readonly List<IOpenApiAny>? supportedLanguages;
 
-    public CultureAwareOperationFilter(IOptions<RequestLocalizationOptions> requestLocalizationOptions)
+    public AcceptLanguageHeaderOperationFilter(IOptions<RequestLocalizationOptions> requestLocalizationOptions)
     {
         supportedLanguages = requestLocalizationOptions.Value
             .SupportedCultures?.Select(c => new OpenApiString(c.TwoLetterISOLanguageName))
@@ -20,7 +20,7 @@ public class CultureAwareOperationFilter : IOperationFilter
 
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        if (supportedLanguages?.Count > 1)
+        if (supportedLanguages?.Any() ?? false)
         {
             operation.Parameters ??= new List<OpenApiParameter>();
 

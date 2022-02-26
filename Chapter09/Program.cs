@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.OperationFilter<CultureAwareOperationFilter>();
+    options.OperationFilter<AcceptLanguageHeaderOperationFilter>();
 });
 
 var supportedCultures = new CultureInfo[] { new("en"), new("it") };
