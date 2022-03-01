@@ -35,4 +35,6 @@ app.UseRequestLocalization();
 
 app.MapGet("/api/culture", () => Thread.CurrentThread.CurrentCulture.DisplayName);
 
+app.MapGet("/api/helloworld", () => Chapter09.Resources.Messages.HelloWorld);
+
 app.Run();
