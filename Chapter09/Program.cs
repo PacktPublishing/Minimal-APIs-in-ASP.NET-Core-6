@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Chapter09.Swagger;
 using Microsoft.AspNetCore.Localization;
+using MiniValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,7 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<AcceptLanguageHeaderOperationFilter>();
 });
 
-var supportedCultures = new CultureInfo[] { new("en"), new("it") };
+var supportedCultures = new CultureInfo[] { new("en"), new("it"), new("fr") };
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
@@ -43,4 +45,40 @@ app.MapGet("/api/hello", (string name) =>
     return message;
 });
 
+app.MapPost("/people-dataannotations", (AnnotatedPerson person) =>
+{
+    var isValid = MiniValidator.TryValidate(person, out var errors);
+    if (!isValid)
+    {
+        return Results.ValidationProblem(errors);
+    }
+
+    return Results.NoContent();
+})
+.Produces(StatusCodes.Status204NoContent)
+.ProducesValidationProblem();
+
 app.Run();
+
+public class AnnotatedPerson
+{
+    [Display(Name = "FirstName", ResourceType = typeof(Chapter09.Resources.Messages))]
+    [Required(ErrorMessageResourceName = "FieldRequired",
+        ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
+    [MaxLength(30, ErrorMessageResourceName = "MaxLength",
+        ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
+    public string FirstName { get; set; }
+
+    [Display(Name = "LastName", ResourceType = typeof(Chapter09.Resources.Messages))]
+    [Required(ErrorMessageResourceName = "FieldRequired",
+        ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
+    [MaxLength(30, ErrorMessageResourceName = "MaxLength",
+        ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
+    public string LastName { get; set; }
+
+    [EmailAddress(ErrorMessageResourceName = "InvalidField",
+        ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
+    [StringLength(100, MinimumLength = 6, ErrorMessageResourceName = "StringLength",
+        ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
+    public string Email { get; set; }
+}
