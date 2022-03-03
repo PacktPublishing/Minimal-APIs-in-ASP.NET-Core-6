@@ -61,6 +61,15 @@ namespace Chapter09.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hello, {0}!.
+        /// </summary>
+        public static string GreetingMessage {
+            get {
+                return ResourceManager.GetString("GreetingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello World!.
         /// </summary>
         public static string HelloWorld {

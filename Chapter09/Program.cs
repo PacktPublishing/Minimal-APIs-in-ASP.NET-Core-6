@@ -37,4 +37,10 @@ app.MapGet("/api/culture", () => Thread.CurrentThread.CurrentCulture.DisplayName
 
 app.MapGet("/api/helloworld", () => Chapter09.Resources.Messages.HelloWorld);
 
+app.MapGet("/api/hello", (string name) =>
+{
+    var message = string.Format(Chapter09.Resources.Messages.GreetingMessage, name);
+    return message;
+});
+
 app.Run();
