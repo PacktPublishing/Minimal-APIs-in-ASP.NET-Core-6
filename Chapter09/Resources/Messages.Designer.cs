@@ -115,6 +115,15 @@ namespace Chapter09.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The field &apos;{PropertyName}&apos; is invalid.
+        /// </summary>
+        public static string InvalidFieldMessage {
+            get {
+                return ResourceManager.GetString("InvalidFieldMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name.
         /// </summary>
         public static string LastName {
@@ -124,11 +133,38 @@ namespace Chapter09.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The field &apos;{PropertyName}&apos; must have a minimum length of {MinLength} and a maximum length of {MaxLength} characters. You have written {TotalLength} characters.
+        /// </summary>
+        public static string LengthMessage {
+            get {
+                return ResourceManager.GetString("LengthMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The field &apos;{PropertyName}&apos; can be up to {MaxLength} characters long. You have written {TotalLength} characters.
+        /// </summary>
+        public static string MaximumLengthMessage {
+            get {
+                return ResourceManager.GetString("MaximumLengthMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The field &apos;{0}&apos; can be up to {1} characters long.
         /// </summary>
         public static string MaxLengthAnnotation {
             get {
                 return ResourceManager.GetString("MaxLengthAnnotation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The field ‘{PropertyName}’ is required.
+        /// </summary>
+        public static string NotEmptyMessage {
+            get {
+                return ResourceManager.GetString("NotEmptyMessage", resourceCulture);
             }
         }
         

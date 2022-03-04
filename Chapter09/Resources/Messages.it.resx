@@ -135,11 +135,23 @@
   <data name="InvalidFieldAnnotation" xml:space="preserve">
     <value>Il campo '{0}' non è valido</value>
   </data>
+  <data name="InvalidFieldMessage" xml:space="preserve">
+    <value>Il campo '{PropertyName}' non è valido</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Cognome</value>
   </data>
+  <data name="LengthMessage" xml:space="preserve">
+    <value>Il campo '{PropertyName}' deve avere una lunghezza minima di {MinLength} e una lunghezza massima di {MaxLength} caratteri. Sono stati inseriti {TotalLength} caratteri</value>
+  </data>
+  <data name="MaximumLengthMessage" xml:space="preserve">
+    <value>Il campo '{PropertyName}' può essere lungo al massimo {MaxLength} caratteri. Sono stati inseriti {TotalLength} caratteri.</value>
+  </data>
   <data name="MaxLengthAnnotation" xml:space="preserve">
     <value>Il campo '{0}' può essere lungo al massimo {1} caratteri</value>
+  </data>
+  <data name="NotEmptyMessage" xml:space="preserve">
+    <value>Il campo ‘{PropertyName}’ è obbligatorio</value>
   </data>
   <data name="StringLengthAnnotation" xml:space="preserve">
     <value>Il campo '{0}' deve avere una lunghezza minima di {2} e una lunghezza massima di {1} caratteri</value>
