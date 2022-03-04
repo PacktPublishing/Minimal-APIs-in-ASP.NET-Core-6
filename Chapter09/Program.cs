@@ -50,7 +50,7 @@ app.MapPost("/people-dataannotations", (AnnotatedPerson person) =>
     var isValid = MiniValidator.TryValidate(person, out var errors);
     if (!isValid)
     {
-        return Results.ValidationProblem(errors);
+        return Results.ValidationProblem(errors, title: Chapter09.Resources.Messages.ValidationErrors);
     }
 
     return Results.NoContent();
@@ -63,22 +63,22 @@ app.Run();
 public class AnnotatedPerson
 {
     [Display(Name = "FirstName", ResourceType = typeof(Chapter09.Resources.Messages))]
-    [Required(ErrorMessageResourceName = "FieldRequired",
+    [Required(ErrorMessageResourceName = "FieldRequiredAnnotation",
         ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
     [MaxLength(30, ErrorMessageResourceName = "MaxLength",
         ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
     public string FirstName { get; set; }
 
     [Display(Name = "LastName", ResourceType = typeof(Chapter09.Resources.Messages))]
-    [Required(ErrorMessageResourceName = "FieldRequired",
+    [Required(ErrorMessageResourceName = "FieldRequiredAnnotation",
         ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
-    [MaxLength(30, ErrorMessageResourceName = "MaxLength",
+    [MaxLength(30, ErrorMessageResourceName = "MaxLengthAnnotation",
         ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
     public string LastName { get; set; }
 
-    [EmailAddress(ErrorMessageResourceName = "InvalidField",
+    [EmailAddress(ErrorMessageResourceName = "InvalidFieldAnnotation",
         ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
-    [StringLength(100, MinimumLength = 6, ErrorMessageResourceName = "StringLength",
+    [StringLength(100, MinimumLength = 6, ErrorMessageResourceName = "StringLengthAnnotation",
         ErrorMessageResourceType = typeof(Chapter09.Resources.Messages))]
     public string Email { get; set; }
 }

@@ -72,9 +72,9 @@ namespace Chapter09.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The field &apos;{0}&apos; is required.
         /// </summary>
-        public static string FieldRequired {
+        public static string FieldRequiredAnnotation {
             get {
-                return ResourceManager.GetString("FieldRequired", resourceCulture);
+                return ResourceManager.GetString("FieldRequiredAnnotation", resourceCulture);
             }
         }
         
@@ -108,9 +108,9 @@ namespace Chapter09.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The field &apos;{0}&apos; is invalid.
         /// </summary>
-        public static string InvalidField {
+        public static string InvalidFieldAnnotation {
             get {
-                return ResourceManager.GetString("InvalidField", resourceCulture);
+                return ResourceManager.GetString("InvalidFieldAnnotation", resourceCulture);
             }
         }
         
@@ -126,18 +126,27 @@ namespace Chapter09.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The field &apos;{0}&apos; can be up to {1} characters long.
         /// </summary>
-        public static string MaxLength {
+        public static string MaxLengthAnnotation {
             get {
-                return ResourceManager.GetString("MaxLength", resourceCulture);
+                return ResourceManager.GetString("MaxLengthAnnotation", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The field &apos;{0}&apos; must have minimum length of {2} and a maximum length of {1} characters.
         /// </summary>
-        public static string StringLength {
+        public static string StringLengthAnnotation {
             get {
-                return ResourceManager.GetString("StringLength", resourceCulture);
+                return ResourceManager.GetString("StringLengthAnnotation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more validation errors occurred..
+        /// </summary>
+        public static string ValidationErrors {
+            get {
+                return ResourceManager.GetString("ValidationErrors", resourceCulture);
             }
         }
     }
