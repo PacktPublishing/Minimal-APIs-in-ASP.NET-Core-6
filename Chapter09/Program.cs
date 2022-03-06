@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Chapter09.Resources;
+using Chapter09.Serialization;
 using Chapter09.Swagger;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -10,6 +11,11 @@ using MiniValidation;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+{
+    options.SerializerOptions.Converters.Add(new UtcDateTimeConverter());
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -84,7 +90,12 @@ app.MapPost("/people-fluentvalidation", (Person person, IValidator<Person> valid
 
 app.MapPost("/date", (DateInput date) =>
 {
-    return Results.Ok(new { Output = date.Value });
+    return Results.Ok(new
+    {
+        Input = date.Value,
+        DateKind = date.Value.Kind.ToString(),
+        ServerDate = DateTime.Now
+    });
 });
 
 app.Run();
