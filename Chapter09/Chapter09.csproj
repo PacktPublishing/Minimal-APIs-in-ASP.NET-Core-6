@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
-    <PackageReference Include="MiniValidation" Version="0.4.1-pre.20220107.41" />
+    <PackageReference Include="MiniValidation" Version="0.4.2-pre.20220306.48" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 

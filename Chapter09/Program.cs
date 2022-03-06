@@ -43,11 +43,11 @@ app.UseHttpsRedirection();
 
 app.UseRequestLocalization();
 
-app.MapGet("/api/culture", () => Thread.CurrentThread.CurrentCulture.DisplayName);
+app.MapGet("/culture", () => Thread.CurrentThread.CurrentCulture.DisplayName);
 
-app.MapGet("/api/helloworld", () => Messages.HelloWorld);
+app.MapGet("/helloworld", () => Messages.HelloWorld);
 
-app.MapGet("/api/hello", (string name) =>
+app.MapGet("/hello", (string name) =>
 {
     var message = string.Format(Messages.GreetingMessage, name);
     return message;
@@ -81,6 +81,11 @@ app.MapPost("/people-fluentvalidation", (Person person, IValidator<Person> valid
 })
 .Produces(StatusCodes.Status204NoContent)
 .ProducesValidationProblem();
+
+app.MapPost("/date", (DateInput date) =>
+{
+    return Results.Ok(new { Output = date.Value });
+});
 
 app.Run();
 
@@ -133,3 +138,5 @@ public class PersonValidator : AbstractValidator<Person>
             .WithName(Messages.Email);
     }
 }
+
+public record DateInput(DateTime Value);
