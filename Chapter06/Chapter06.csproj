@@ -11,7 +11,7 @@
 		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
 		<PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="5.4.0" />
 		<PackageReference Include="MiniValidation" Version="0.4.2-pre.20220306.48" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
 	</ItemGroup>
 
 </Project>
