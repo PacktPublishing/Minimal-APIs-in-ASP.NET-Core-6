@@ -160,7 +160,7 @@ namespace Chapter09.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The field ‘{PropertyName}’ is required.
+        ///   Looks up a localized string similar to The field &apos;{PropertyName}&apos; is required.
         /// </summary>
         public static string NotEmptyMessage {
             get {

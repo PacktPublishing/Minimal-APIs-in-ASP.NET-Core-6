@@ -31,7 +31,7 @@ public class AcceptLanguageHeaderOperationFilter : IOperationFilter
                 Required = false,
                 Schema = new OpenApiSchema
                 {
-                    Type = "String",
+                    Type = "string",
                     Enum = supportedLanguages,
                     Default = supportedLanguages.First()
                 }

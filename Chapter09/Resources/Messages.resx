@@ -151,7 +151,7 @@
     <value>The field '{0}' can be up to {1} characters long</value>
   </data>
   <data name="NotEmptyMessage" xml:space="preserve">
-    <value>The field ‘{PropertyName}’ is required</value>
+    <value>The field '{PropertyName}' is required</value>
   </data>
   <data name="StringLengthAnnotation" xml:space="preserve">
     <value>The field '{0}' must have minimum length of {2} and a maximum length of {1} characters</value>
