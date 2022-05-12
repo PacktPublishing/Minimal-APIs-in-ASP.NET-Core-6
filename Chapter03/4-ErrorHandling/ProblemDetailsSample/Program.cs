@@ -31,7 +31,7 @@ app.MapGet("/internal-server-error", () =>
 
 app.MapGet("/not-implemented-exception", () =>
 {
-    throw new NotImplementedException("This is an exception thrown from an Minimal API.");
+    throw new NotImplementedException("This is an exception thrown from a Minimal API.");
 })
     .Produces<ProblemDetails>(StatusCodes.Status501NotImplemented)
     .WithName("NotImplementedExceptions");
