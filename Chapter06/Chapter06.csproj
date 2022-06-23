@@ -8,7 +8,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-		<PackageReference Include="FluentValidation.AspNetCore" Version="11.0.3" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.1.0" />
 		<PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="5.7.0" />
 		<PackageReference Include="MiniValidation" Version="0.6.0-pre.20220527.55" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
