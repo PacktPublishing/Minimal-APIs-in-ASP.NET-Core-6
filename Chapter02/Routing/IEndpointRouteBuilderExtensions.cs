@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Chapter02.Registration;
+namespace Chapter02.Routing;
 
 public static class IEndpointRouteBuilderExtensions
 {
@@ -19,7 +19,7 @@ public static class IEndpointRouteBuilderExtensions
         foreach (var endpointRouteHandlerType in endpointRouteHandlerTypes)
         {
             var instantiatedType = (IEndpointRouteHandler)Activator.CreateInstance(endpointRouteHandlerType)!;
-            instantiatedType.Map(app);
+            instantiatedType.MapEndpoints(app);
         }
     }
 }

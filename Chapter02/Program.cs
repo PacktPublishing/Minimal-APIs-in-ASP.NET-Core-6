@@ -3,11 +3,12 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
 using Chapter02.Extensions;
-using Chapter02.Registration;
+using Chapter02.Routing;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
 {
     options.SerializerOptions.IgnoreReadOnlyProperties = true;
@@ -22,6 +23,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {

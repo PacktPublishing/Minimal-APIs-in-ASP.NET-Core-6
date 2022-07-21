@@ -7,10 +7,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
-		<PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="5.4.0" />
-		<PackageReference Include="MiniValidation" Version="0.4.1-pre.20220107.41" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
+		<PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="5.7.0" />
+		<PackageReference Include="MiniValidation" Version="0.6.0-pre.20220527.55" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	</ItemGroup>
 
 </Project>
