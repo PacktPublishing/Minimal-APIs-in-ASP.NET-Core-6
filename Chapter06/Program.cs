@@ -23,8 +23,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    _ = app.UseSwagger();
-    _ = app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
@@ -145,11 +145,11 @@ public class PersonValidator : AbstractValidator<Person>
 {
     public PersonValidator()
     {
-        _ = RuleFor(p => p.FirstName).NotEmpty()
+        RuleFor(p => p.FirstName).NotEmpty()
             .WithMessage("You must provide the first name")
             .MaximumLength(30);
 
-        _ = RuleFor(p => p.LastName).NotEmpty().MaximumLength(30);
-        _ = RuleFor(p => p.Email).EmailAddress().Length(6, 100);
+        RuleFor(p => p.LastName).NotEmpty().MaximumLength(30);
+        RuleFor(p => p.Email).EmailAddress().Length(6, 100);
     }
 }

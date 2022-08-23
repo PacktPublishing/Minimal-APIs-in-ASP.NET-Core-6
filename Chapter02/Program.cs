@@ -24,12 +24,13 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI(options =>
+if (app.Environment.IsDevelopment())
 {
-    options.RoutePrefix = string.Empty;
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Chapter 2 API");
-});
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
 
 app.MapPut("/people/{id:int}",
     (int id, bool notify, Person person, PeopleService service) => { });
