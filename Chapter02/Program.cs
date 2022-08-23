@@ -39,7 +39,7 @@ app.MapGet("/search", ([FromQuery(Name = "q")] string searchText) => { });
 // This won't compile
 //app.MapGet("/people", (int pageIndex = 0, int itemsPerPage = 50) => { });
 
-string SearchMethod(int pageIndex = 0, int itemsPerPage = 50, string? orderBy = null)
+static string SearchMethod(int pageIndex = 0, int itemsPerPage = 50, string? orderBy = null)
     => $"Sample result for page {pageIndex} getting {itemsPerPage} elements (ordered by {orderBy})";
 
 app.MapGet("/people", SearchMethod);
