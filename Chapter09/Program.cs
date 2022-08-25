@@ -68,14 +68,12 @@ app.MapPost("/people-dataannotations", (AnnotatedPerson person) =>
 .Produces(StatusCodes.Status204NoContent)
 .ProducesValidationProblem();
 
-app.MapPost("/people-fluentvalidation", (Person person, IValidator<Person> validator) =>
+app.MapPost("/people-fluentvalidation", async (Person person, IValidator<Person> validator) =>
 {
-    var validationResult = validator.Validate(person);
+    var validationResult = await validator.ValidateAsync(person);
     if (!validationResult.IsValid)
     {
-        var errors = validationResult.Errors.GroupBy(e => e.PropertyName)
-            .ToDictionary(k => k.Key, v => v.Select(e => e.ErrorMessage).ToArray());
-
+        var errors = validationResult.ToDictionary();
         return Results.ValidationProblem(errors, title: Messages.ValidationErrors);
     }
 
