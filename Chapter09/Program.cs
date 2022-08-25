@@ -4,7 +4,6 @@ using Chapter09.Resources;
 using Chapter09.Serialization;
 using Chapter09.Swagger;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Localization;
 using MiniValidation;
 
@@ -22,10 +21,7 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<AcceptLanguageHeaderOperationFilter>();
 });
 
-builder.Services.AddFluentValidation(options =>
-{
-    options.RegisterValidatorsFromAssemblyContaining<Program>();
-});
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 var supportedCultures = new CultureInfo[] { new("en"), new("it"), new("fr") };
 
