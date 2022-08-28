@@ -24,12 +24,13 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI(options =>
+if (app.Environment.IsDevelopment())
 {
-    options.RoutePrefix = string.Empty;
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Chapter 2 API");
-});
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
 
 app.MapPut("/people/{id:int}",
     (int id, bool notify, Person person, PeopleService service) => { });
@@ -39,7 +40,7 @@ app.MapGet("/search", ([FromQuery(Name = "q")] string searchText) => { });
 // This won't compile
 //app.MapGet("/people", (int pageIndex = 0, int itemsPerPage = 50) => { });
 
-string SearchMethod(int pageIndex = 0, int itemsPerPage = 50, string? orderBy = null)
+static string SearchMethod(int pageIndex = 0, int itemsPerPage = 50, string? orderBy = null)
     => $"Sample result for page {pageIndex} getting {itemsPerPage} elements (ordered by {orderBy})";
 
 app.MapGet("/people", SearchMethod);
