@@ -1,6 +1,5 @@
 using Chapter07.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 
