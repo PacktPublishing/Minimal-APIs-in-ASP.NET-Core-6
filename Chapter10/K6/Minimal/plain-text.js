@@ -1,6 +1,8 @@
 import http from "k6/http";
 import { check } from "k6";
+import { Rate } from 'k6/metrics';
 
+const errorRate = new Rate('errorRate');
 export let options = {
     summaryTrendStats: ["avg", "p(95)"],
     stages: [
@@ -17,11 +19,9 @@ export let options = {
         // Requests with the staticAsset tag should finish even faster
         "http_req_duration{staticAsset:yes}": ["p(99)<250"],
         // Thresholds based on the custom metric we defined and use to track application failures
-        "check_failure_rate": [
-            // Global failure rate should be less than 1%
-            "rate<0.01",
-            // Abort the test early if it climbs over 5%
-            { threshold: "rate<=0.05", abortOnFail: true },
+        errorRate: [
+            // more than 5% of errors will abort the test
+            { threshold: 'rate < 0.05', abortOnFail: true, delayAbortEval: '1m' },
         ],
     },
 };
