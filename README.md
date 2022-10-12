@@ -29,9 +29,7 @@ app.MapGet(/hello-get, () => [GET] Hello World!);
 app.MapPost(/hello-post, () => [POST] Hello World!);
 app.MapPut(/hello-put, () => [PUT] Hello World!);
 app.MapDelete(/hello-delete, () => [DELETE] Hello World!);
-
 ```
-
 **Following is what you need for this book:**
 	If you are an existing .NET developer who wants to develop lightweight APIs quickly without much complexity, this book is for you. If you are a developer who is just getting started with the ASP.NET Core framework, this book will help you learn web API development using the latest .NET features. The book assumes intermediate-level knowledge of C# programming, Visual Studio, and REST API concepts.
 
