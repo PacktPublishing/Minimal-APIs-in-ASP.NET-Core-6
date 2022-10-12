@@ -25,38 +25,10 @@ All of the code is organized into folders. For example, Chapter02.
 
 The code will look like the following:
 ```
-There are a number of text conventions used throughout this book.
-
-Code in text: Indicates code words in text, database table names, folder names, filenames, file
-extensions, pathnames, dummy URLs, user input, and Twitter handles. Here is an example: In minimal
-APIs, we define the route patterns using the Map* methods of the WebApplication object.
-
-A block of code is set as follows: 
-
 app.MapGet(/hello-get, () => [GET] Hello World!);
 app.MapPost(/hello-post, () => [POST] Hello World!);
 app.MapPut(/hello-put, () => [PUT] Hello World!);
 app.MapDelete(/hello-delete, () => [DELETE] Hello World!);
-
-When we wish to draw your attention to a particular part of a code block, the relevant lines or items
-are set in bold:
-if (app.Environment.IsDevelopment())
-{
-app.UseSwagger();
-app.UseSwaggerUI();
-}
-
-Any command-line input or output is written as follows:
-
-dotnet new webapi -minimal -o Chapter01
-
-Bold: Indicates a new term, an important word, or words that you see onscreen. For instance, words
-in menus or dialog boxes appear in bold. Here is an example: Open Visual Studio 2022 and from
-the main screen, click on Create a new project.
-
-Tips or important notes
-Appear like this.
-```
 
 **Following is what you need for this book:**
 	If you are an existing .NET developer who wants to develop lightweight APIs quickly without much complexity, this book is for you. If you are a developer who is just getting started with the ASP.NET Core framework, this book will help you learn web API development using the latest .NET features. The book assumes intermediate-level knowledge of C# programming, Visual Studio, and REST API concepts.
