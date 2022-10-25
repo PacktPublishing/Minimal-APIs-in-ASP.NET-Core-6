@@ -59,3 +59,7 @@ Computer enthusiast since elementary school, when he receives an old Commodore V
 **Emanuele Bartolesi**
 Emanuele is a Microsoft 365 Architect, passionate about frontend technologies and everything related to the cloud, especially Microsoft Azure. He is currently living in Zurich and actively participating in local and international community activities and events. Emanuele shares his love for technology through his blog. He has also became a Twitch Affiliate as a live coder and you can follow him at kasuken to write some code with him. Since 2014 Emanuele is a Microsoft MVP in the Developer Technologies category and since 2022 he is a GitHub Star. You can find Emanuele on Twitter.
 
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781803237824">https://packt.link/free-ebook/9781803237824 </a> </p>
